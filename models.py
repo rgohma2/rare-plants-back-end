@@ -1,6 +1,8 @@
 from peewee import *
 import datetime
 
+from flask_login import UserMixin
+
 DATABASE = SqliteDatabase('plants.sqlite')
 
 class BaseModel(Model):
