@@ -24,10 +24,12 @@ def register():
 	payload['username'] = payload['username'].lower()
 
 	try:
-			# encrypting password before creating it
+
+		# encrypting password before creating it
 		payload['password'] = generate_password_hash(payload['password'])
 
 		with DATABASE.atomic():
+
 		# creating new user
 			new_user = models.User.create(
 					username=payload['username'],
@@ -50,10 +52,28 @@ def register():
 		print('ERROR ARGUMENTS')
 		print(e.args[0])
 
+		# using the peewee.integrity error to check if the email/username is taken
+
 		if e.args[0] == 'UNIQUE constraint failed: user.email':
-			return 'bad email'
+			
+			return jsonify(
+				data={},
+				message='There is already a user registered with that email.',
+				status=401
+			), 401
+
+		elif e.args[0] == 'UNIQUE constraint failed: user.username':
+
+			return jsonify(
+				data={},
+				message='There is already a user registered with that username.',
+				status=401
+			), 401
 		else:
-			return 'bad username'
+			print('ERROR')
+			return e
+
+
 
 
 		
