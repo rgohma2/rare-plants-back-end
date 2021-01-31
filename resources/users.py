@@ -47,8 +47,13 @@ def register():
 
 	except IntegrityError as e:
 
-		print(e.args)
-		return 'hi'
+		print('ERROR ARGUMENTS')
+		print(e.args[0])
+
+		if e.args[0] == 'UNIQUE constraint failed: user.email':
+			return 'bad email'
+		else:
+			return 'bad username'
 
 
 		
