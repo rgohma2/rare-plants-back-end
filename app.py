@@ -10,7 +10,7 @@ PORT = 8000
 
 
 app = Flask(__name__)
-
+app.secret_key = "big ol' secret"
 
 
 app.register_blueprint(users, url_prefix='/api/v1/users')

@@ -12,7 +12,7 @@ class BaseModel(Model):
 
 
 class User(BaseModel):
-	user_name = CharField(unique=True)
+	username = CharField(unique=True)
 	email = CharField(unique=True)
 	password = CharField()
 	date_created = DateTimeField(default=datetime.datetime.now)
