@@ -113,7 +113,12 @@ def login():
 				), 401			
 
 	except models.DoesNotExist:
-		return 'email or username does not exist'
+		print('bad login')
+		return jsonify(
+				data={},
+				message='Incorrect login or password.',
+				status=401
+			), 401
 
 
 
