@@ -11,7 +11,7 @@ class BaseModel(Model):
 		database = DATABASE
 
 
-class User(BaseModel):
+class User(BaseModel, UserMixin):
 	username = CharField(unique=True)
 	email = CharField(unique=True)
 	password = CharField()

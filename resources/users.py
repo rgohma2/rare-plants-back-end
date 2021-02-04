@@ -74,6 +74,51 @@ def register():
 			return e
 
 
+@users.route('/login', methods=['POST'])
+def login():
+	"""User login route"""
+	payload = request.get_json()
+	payload['login'].lower()
+
+	login = payload['login']
+
+	email_login = False
+
+	if '@' in payload['login']:
+		email_login = True
+
+	try:
+		user = None
+
+		if email_login:
+			user = models.User.get(models.User.email == payload['login'])
+		else:
+			user = models.User.get(models.User.username == payload['login'])
+		user_dict = model_to_dict(user)
+		password_matches = check_password_hash(user_dict['password'], payload['password'])
+		if password_matches:
+			login_user(user)
+			user_dict.pop('password')
+			return jsonify(
+					data=user_dict,
+					message=f'Welcome back {login}',
+					status=201
+				), 201
+		else:
+			print('bad password')
+			return jsonify(
+					data={},
+					message='Incorrect login or password.',
+					status=401
+				), 401			
+
+	except models.DoesNotExist:
+		return 'email or username does not exist'
+
+
+
+
+
 
 
 		
