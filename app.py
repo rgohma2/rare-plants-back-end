@@ -1,6 +1,7 @@
 print ('Hell0 W0rld')
 from flask import Flask, jsonify
 from flask_login import LoginManager
+from flask_cors import CORS
 
 import models
 
@@ -11,6 +12,11 @@ PORT = 8000
 
 
 app = Flask(__name__)
+
+CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
+
+app.register_blueprint(users, url_prefix='/api/v1/users')
+
 app.secret_key = "big ol' secret"
 
 login_manager = LoginManager()
@@ -33,7 +39,6 @@ def unauthorized():
 		), 401 
 
 
-app.register_blueprint(users, url_prefix='/api/v1/users')
 
 
 
