@@ -21,7 +21,8 @@ def make_post(user_id):
 			price=payload['price'],
 			seed_count=payload['seed_count'],
 			image=payload['image'],
-			category=payload['category'] 
+			category=payload['category'],
+			description=payload['description'] 
 		)
 
 	post_dict = model_to_dict(post)

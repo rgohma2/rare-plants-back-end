@@ -24,6 +24,7 @@ class Post(BaseModel):
 	seed_count = CharField()
 	image = CharField()
 	category = CharField()
+	description = CharField()
 	date_created = DateTimeField(default=datetime.datetime.now)
 
 
