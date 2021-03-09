@@ -36,7 +36,7 @@ def register():
 					email=payload['email'],
 					password=payload['password']
 				)
-
+		login_user(new_user)
 		new_user_dict = model_to_dict(new_user)
 		new_user_dict.pop('password')
 
